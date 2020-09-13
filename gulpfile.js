@@ -7,7 +7,6 @@ const sass = require('gulp-sass');
 const cleanCSS = require('gulp-clean-css');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
-const imagemin = require('gulp-imagemin');
 
 const fs = require("fs");
 const glob = require("glob");
@@ -120,7 +119,6 @@ function images(done) {
             convertJpeg: true,
             resize: {
                 width: 200
-                //fit: "cover",
             }
         }
     ];
@@ -157,34 +155,40 @@ function images(done) {
                 sharpTask
                     .jpeg({ quality: transform.quality })
                     .toFile(`${transform.dist}/${distFileName}`)
-                    .catch((err) => {
-                        console.log(err);
-                    });
+                        .then((info) => {
+                            if (transform.updateFotosJson) {
+                                updateFotosJson(fotos, distFileName, info)
+                            }
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
             }else {
                 distFileName = `${filename}${fileExtension}`;
                 sharpTask
                     .toFile(`${transform.dist}/${distFileName}`)
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            }
-            
-            if (transform.updateFotosJson) {
-                sharpTask.metadata()
-                    .then(info => {
-                        fotos.data.push({
-                            "nome": distFileName,
-                            "width": info.width,
-                            "height": info.height
+                        .then((info) => {
+                            if (transform.updateFotosJson) {
+                                updateFotosJson(fotos, distFileName, info)
+                            }
                         })
-                    })
-                    .then(() => {
-                        fs.writeFileSync('./src/fotos.json', JSON.stringify(fotos));
-                    })
+                        .catch((err) => {
+                            console.log(err);
+                        });
             }
         });
     });
     done();
+}
+
+function updateFotosJson(fotos, distFileName, info) {
+    fotos.data.push({
+        "nome": distFileName,
+        "width": info.width,
+        "height": info.height
+    })
+    console.info(info)
+    fs.writeFileSync('./src/fotos.json', JSON.stringify(fotos));
 }
 
 exports.build = parallel(copyIco, 
