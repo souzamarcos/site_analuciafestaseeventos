@@ -212,7 +212,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
 var images = null;
 var displayedImages = 0;
-var buscarFotos = function(){
+var buscarFotos = () =>{
 	$('.fotos-galeria .loading').show();
 	if(!images) {
 		$.ajax({
@@ -234,7 +234,7 @@ var buscarFotos = function(){
 	}
 }
 
-var exibirFotos = function(){
+var exibirFotos = () =>{
 	if(images){
 		//todo fazer "paginação"
 		images.forEach(function(item){
@@ -242,6 +242,13 @@ var exibirFotos = function(){
         });
         $('.fotos-galeria .loading').hide();
 	}
+}
+
+var loadGoogleMaps = () => {
+    var scriptElement = document.createElement("script");
+    scriptElement.type = "text/javascript";
+    scriptElement.src  = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCPmN8z-_VHhh7zMK_0v0Mvz3F_vi7C1jg&callback=iniciarMapa";
+    $("head").append(scriptElement);  
 }
 
 $(document).ready(function() {
@@ -280,4 +287,6 @@ $(document).ready(function() {
         Home.lastScrollTop = $(window).scrollTop();
 
     });
+    
+    loadGoogleMaps()
 });
