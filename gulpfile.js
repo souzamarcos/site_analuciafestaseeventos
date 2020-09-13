@@ -63,6 +63,7 @@ function appScript() {
         //external
         './src/assets/js/jquery-3.2.1.js',
         './src/assets/js/bootstrap-3.3.7.js',
+        './src/assets/js/lazysizes-4.1.1.js',
 
         //app
         './src/assets/js/home/mapa.js',
