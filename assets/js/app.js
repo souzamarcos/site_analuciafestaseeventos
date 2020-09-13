@@ -12565,22 +12565,32 @@ var fotospage = 1;
 var buscarFotos = function(){
     $('.fotos-galeria .loading').show();
     $.ajax({
-        url: site + "/fotos/list",
+        url: "fotos.json",
         method: 'GET',
-        data: {
+        /*data: {
             page: fotospage
-        }
+		}*/
+		dataType: "json",
     }).done(function(response) {
         fotospage++;
         $('.fotos-galeria .loading').hide();
         if(response.data){
             response.data.forEach(function(item){
-                $('.galeria').append('<figure class="foto" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a href="'+ site +'/uploads/' + item.nome + '" itemprop="contentUrl" data-size="' + item.width + 'x' + item.height + '"><img src="'+ site +'/uploads/thumbnail/' + item.nome + '" itemprop="thumbnail" alt="" /></a><figcaption itemprop="caption description"></figcaption></figure>');
-            });
+               $('.galeria').append('<figure class="foto" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a href="assets/img/fotos/' + item.nome + '" itemprop="contentUrl" data-size="' + item.width + 'x' + item.height + '"><img src="assets/img/fotos/thumbnail/' + item.nome + '" itemprop="thumbnail" alt="" /></a><figcaption itemprop="caption description"></figcaption></figure>');
+		});
         }
         if(fotospage>response.last_page)
         $('.btn-buscar-mais').hide();
-    });
+	});
+	/*var fotos = JSON.parse(fotos);
+	$('.fotos-galeria .loading').hide();
+	if(fotos.data){
+		fotos.data.forEach(function(item){
+			$('.galeria').append('<figure class="foto" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject"><a href="assets/img/fotos/' + item.nome + '" itemprop="contentUrl" data-size="' + item.width + 'x' + item.height + '"><img src="assets/img/fotos/thumbnail/' + item.nome + '" itemprop="thumbnail" alt="" /></a><figcaption itemprop="caption description"></figcaption></figure>');
+		});
+	}
+	if(fotospage>response.last_page)
+	$('.btn-buscar-mais').hide();*/
 }
 
 $(document).ready(function() {

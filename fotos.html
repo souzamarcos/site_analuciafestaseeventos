@@ -3,19 +3,19 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="description" content="Você conta com a opção de um espaço grande, acolhedor e de fácil acesso. Localizado no bairro Retiro em Volta Redonda, comporta 350 pessoas e possui diversas opções de serviços incluídos."/>
+    <meta name="description" content="Veja os registros dos diversos eventos especiais que já proporcionamos para nossos clientes. Todos realizados com muito carinho e uma equipe qualificada."/>
     <meta name="robots" content="index, follow"/>
-    <meta name="keywords" content="ana, lucia, volta redonda, evento, eventos, festa, buffet, ana, lucia, festas, barra mansa, sul fluminense, salão, espaco"/>
+    <meta name="keywords" content="ana, lucia, volta redonda, evento, eventos, festa, buffet, ana, lucia, festas, barra mansa, sul fluminense, salão, fotos"/>
     <meta name="language" content="pt-br" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
 
-    <meta property="og:url"                content="analuciafestaseeventos.com.br/espaço" />
+    <meta property="og:url"                content="analuciafestaseeventos.com.br/fotos" />
     <meta property="og:type"               content="website" />
-    <meta property="og:title"              content="Ana Lúcia Festas e Eventos - Espaço" />
-    <meta property="og:description"        content="Você conta com a opção de um espaço grande, acolhedor e de fácil acesso. Localizado no bairro Retiro em Volta Redonda, comporta 350 pessoas e possui diversas opções de serviços incluídos." />
+    <meta property="og:title"              content="Ana Lúcia Festas e Eventos - Fotos" />
+    <meta property="og:description"        content="Veja os registros dos diversos eventos especiais que já proporcionamos para nossos clientes. Todos realizados com muito carinho e uma equipe qualificada." />
     <meta property="og:image"              content="assets/img/banner_1.jpeg" />
 
-    <title>Ana Lúcia Festas e Eventos - Espaço</title>
+    <title>Ana Lúcia Festas e Eventos - Fotos</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -38,13 +38,13 @@
                     <li>Home</li>
                 </a>
                 <a href="/fotos" alt="Fotos">
-                    <li>Fotos</li>
+                    <li class="active">Fotos</li>
                 </a>
                 <a href="/servicos" alt="Serviços">
                     <li>Serviços</li>
                 </a>
                 <a href="/espaco" alt="Espaço">
-                    <li class="active">Espaço</li>
+                    <li>Espaço</li>
                 </a>
                 <a href="#contato" alt="Contato">
                     <li class="contato">Contato</li>
@@ -60,51 +60,17 @@
     </header>
 
     <main>
-        <section class="banner-mini" style="background-image: url(assets/img/banner_espaco.jpg)">
-            <h1 class="title-page">Espaço</h1>
+        <section class="banner-mini" style="background-image: url(assets/img/banner_mini.jpg)">
+            <h1 class="title-page">Fotos</h1>
         </section>
-        <section class="container espaco">
-            <section class="section-line flex row-reverse white clearfix ">
-                <div class="col-md-6 image">
-                    <figure>
-                        <img src="assets/img/espaco.jpg" alt="Salão de festas">
-                    </figure>
-                </div>
-                <div class="col-md-6 description full no-padding-sm">
-                    <div class="card-description">
-                        <h4 class="section-title">Salão de Festas Retiro</h4>
-                        <p class="text">Nosso espaço localizado na Avenida Antônio de Almeida, número 937 no Bairro Retiro em Volta Redonda tem capacidade para 350 pessoas com uma área externa para realização de cerimônias também oferece:</p>
-                        <ul>
-                            <li>Sistema de ar condicionado</li>
-                            <li>Cozinha equipada</li>
-                            <li>Banheiros privativos</li>
-                            <li>Iluminação decorativa</li>
-                            <li>Cadeiras de ferro estofadas brancas</li>
-                            <li>Mesas quadrada com tampos de vidro para 10 lugares</li>
-                            <li>Área para montagem de louger</li>
-                        </ul>
-                        <p class="text">Além da ótima estrutura você também tem diversas opções de serviços caso escolha utilizar nosso salão. Venha nos fazer uma vísita ou entre em contato para saber mais.</p>
-                    </div>
-                </div>
-            </section>
-        </section>
-        <!-- <section class="container no-padding-top">
+        <div class="container">
             <section class="fotos-galeria">
                 <div class="galeria" itemscope itemtype="http://schema.org/ImageGallery">
-                    <figure class="foto" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
-                        <a href="assets/img/espaco.jpg" itemprop="contentUrl" data-size="800x600">
-                            <img src="assets/img/espaco.jpg" itemprop="thumbnail" alt="">
-                        </a>
-                        <figcaption itemprop="caption description"></figcaption>
-                    </figure>
-                    <figure class="foto" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">
-                        <a href="assets/img/espaco.jpg" itemprop="contentUrl" data-size="800x600">
-                            <img src="assets/img/espaco.jpg" itemprop="thumbnail" alt="">
-                        </a>
-                        <figcaption itemprop="caption description"></figcaption>
-                    </figure>
                 </div>
-        </section> -->
+                <img src="assets/img/preloader.gif" alt="Loading" class="loading">
+                <button class="btn-flat btn-buscar-mais orange disabled" onclick="buscarFotos();">Carregar Mais</button>
+            </section>
+        </div>
         
         <!-- Root element of PhotoSwipe. Must have class pswp. -->
         <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
