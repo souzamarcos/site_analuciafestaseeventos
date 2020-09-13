@@ -96,7 +96,7 @@ function images(done) {
             convertJpeg: true
         },
         {
-            src: "./src/assets/img/*.{png}",
+            src: "./src/assets/img/*.png",
             dist: "./docs/assets/img/",
             quality: 50,
             convertJpeg: false
