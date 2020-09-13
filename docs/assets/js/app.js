@@ -1,3 +1,46 @@
+class Mapa {
+
+    constructor(element) {
+        this.mapa = null;
+        this.markers = [];
+
+        this.InicarMapa(element);
+    }
+    InicarMapa(element) {
+        let self = this;
+
+        self.mapa = new google.maps.Map(element, {
+            zoom: 16,
+            center: { lat: -22.5007214, lng: -44.1208134 },
+            scrollwheel: false,
+        });
+
+        var marker = new google.maps.Marker({
+            position: { lat: -22.5007214, lng: -44.1208134 },
+            map: mapa,
+            title: 'Ana Lúcia Festas e Eventos'
+        });
+        self.AddMarker(marker);
+    }
+    AddMarker(marker) {
+        let self = this;
+        marker.setMap(self.mapa);
+    }
+}
+class Home {
+
+    constructor() {}
+    static AtualizarBackroundNav() {
+        if ($(window).scrollTop() >= ($('section.banner').height() - $('header >nav').height())) {
+            $('header>nav').removeClass('transparente');
+            $('header>nav').addClass('branco');
+        } else {
+            $('header>nav').removeClass('branco');
+            $('header>nav').addClass('transparente');
+        }
+    }
+}
+
 //bibliotecas externas
 // window.$ = window.jQuery = require('jquery')
 // require('bootstrap-sass');
@@ -243,8 +286,6 @@ $(document).ready(function() {
         interval: 3000
     });
 
-    $('[data-toggle="validator"]').validator();
-
     $('[data-toggle="tooltip"]').tooltip();
 
     $('header nav').on('click', 'a[href*="#"]', function() {
@@ -270,7 +311,4 @@ $(document).ready(function() {
         Home.lastScrollTop = $(window).scrollTop();
 
     });
-
-    //mascaras 
-    $('[name="telefone"]').inputmask('(99) 9999-9999[9]');
 });

@@ -243,8 +243,6 @@ $(document).ready(function() {
         interval: 3000
     });
 
-    $('[data-toggle="validator"]').validator();
-
     $('[data-toggle="tooltip"]').tooltip();
 
     $('header nav').on('click', 'a[href*="#"]', function() {
@@ -270,7 +268,4 @@ $(document).ready(function() {
         Home.lastScrollTop = $(window).scrollTop();
 
     });
-
-    //mascaras 
-    $('[name="telefone"]').inputmask('(99) 9999-9999[9]');
 });

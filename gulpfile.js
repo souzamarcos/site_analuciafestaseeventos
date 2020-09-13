@@ -3,14 +3,16 @@
 /*var autoprefixer = require('gulp-autoprefixer');
 var csso = require('gulp-csso');
 var del = require('del');*/
-const { parallel, src, dest } = require('gulp');
+const { parallel, src, dest, watch  } = require('gulp');
 const rename = require('gulp-rename');
 const concat = require('gulp-concat');
 
 const htmlmin = require('gulp-htmlmin');
 const sass = require('gulp-sass');
+const cleanCSS = require('gulp-clean-css');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
+const imagemin = require('gulp-imagemin');
 
 
 function pages() {
@@ -27,18 +29,33 @@ function fotosJson() {
         .pipe(dest('./docs'));
 }
 
-function css() {
+function appCss() {
     return src([
         './src/assets/sass/app.scss'
     ])
     .pipe(sass())
+    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(dest('./docs/assets/css'));
 }
 
+function photoSwipeCss() {
+    return src([
+        './src/assets/sass/photoswipe/*.scss'
+    ])
+    .pipe(concat('photoswipe.scss'))
+    .pipe(sass())
+    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(dest('./docs/assets/css'));
+}
+
+
 function appScript() {
     return src([
+        './src/assets/js/home/mapa.js',
+        './src/assets/js/home/home.js',
         './src/assets/js/app.js'
     ])
+    .pipe(concat('app.js'))
     .pipe(dest('./docs/assets/js/'))
     .pipe(babel({
         presets: ['@babel/env']
@@ -61,4 +78,40 @@ function photoSwipeScript() {
     .pipe(dest('./docs/assets/js/'));
 }
 
-exports.build = parallel(pages, fotosJson, css, appScript, photoSwipeScript);
+function images() {
+    return src([
+        './src/assets/img/*'
+    ])
+    .pipe(imagemin())
+    .pipe(dest('./docs/assets/img'));
+}
+
+function galleryImages() {
+    return src([
+        './src/assets/img/*',
+        './src/assets/img/fotos/*'
+    ])
+    .pipe(imagemin())
+    .pipe(dest('./docs/assets/img'));
+}
+
+
+function galleryThumbnails() {
+    return src([
+        './src/assets/img/fotos/thumbnail/*'
+    ])
+    .pipe(imagemin([
+        imagemin.gifsicle({interlaced: true}),
+        imagemin.mozjpeg({quality: 35, progressive: true}),
+        imagemin.optipng({optimizationLevel: 5}),
+        imagemin.svgo({
+            plugins: [
+                {removeViewBox: true},
+                {cleanupIDs: false}
+            ]
+        })
+    ]))
+    .pipe(dest('./docs/assets/img/fotos/thumbnail/'));
+}
+
+exports.build = parallel(pages, fotosJson, appCss, photoSwipeCss, appScript, photoSwipeScript, images, galleryThumbnails);

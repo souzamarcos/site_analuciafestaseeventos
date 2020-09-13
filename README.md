@@ -4,6 +4,8 @@ Páginas estáticas necessárias para o funcionamento do site. [Ver aqui](https:
 
 Site está sendo hospedado pelo próprio Github.
 
+Os arquivos do site minificados vão ficar disponíveis na pasta "/docs"
+
 # Tecnologias
 * [gulp](https://gulpjs.com/)
 * [jQuery](https://jquery.com/)
@@ -16,7 +18,12 @@ Primeiro é necessário instalar o gulp globalmente
 npm install --global gulp-cli
 ```
 
-Depois é necessário intalar as outras dependências
+Depois é necessário intalar as dependências
 ```
 npm install
+```
+
+Agora é só rodar o gulp
+```
+gulp build
 ```
