@@ -20,6 +20,11 @@ function copyIco() {
     .pipe(dest('./docs/'));
 }
 
+function copyGifs() {
+    return src('./src/assets/img/*.gif')
+    .pipe(dest('./docs/assets/img'));
+}
+
 function pages() {
     return src(['./src/*.html'])
     .pipe(htmlmin({
@@ -96,7 +101,7 @@ function images(done) {
             convertJpeg: true
         },
         {
-            src: "./src/assets/img/*.png",
+            src: "./src/assets/img/*.{png}",
             dist: "./docs/assets/img/",
             quality: 50,
             convertJpeg: false
@@ -166,4 +171,13 @@ function images(done) {
     done();
 }
 
-exports.build = parallel(copyIco, pages, fotosJson, appCss, photoSwipeCss, appScript, photoSwipeScript, images);
+exports.build = parallel(copyIco, 
+    copyGifs, 
+    pages, 
+    fotosJson, 
+    appCss, 
+    photoSwipeCss, 
+    appScript, 
+    photoSwipeScript, 
+    images
+);
