@@ -1,0 +1,67 @@
+.loading{
+    display: block;
+    margin: 0 auto 30px auto;
+}
+.galeria {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    
+    .foto{
+        min-width: 200px;
+        max-width: 200px;
+        margin-bottom: 15px;
+    }
+    figure {
+        overflow: hidden;
+        position: relative;
+        display: block;
+        margin: 10px;
+        cursor: pointer;
+        &:before {
+            @include transition( background-color 0.4s, background-size 0.4s);
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: transparent;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-image: url(../img/picture.png);
+            background-size: 0px 0px;
+            z-index: 2;
+        }
+        &:hover {
+            &:before {
+                background-color: rgba(#000, 0.35);
+                background-size: 60px 60px;
+            }
+            img {
+                @include transform(scale(1.1));
+            }
+        }
+    }
+    img {
+        @include transition(transform 0.4s);
+        max-width: 100%;
+    }
+}
+
+.btn-buscar-mais{
+    width: 150px;
+    display: block;
+    margin: 0 auto;
+}
+
+@include bp-menor-768{
+    .galeria {
+        .foto{
+            max-width: none;
+        }
+    }
+}

@@ -1,0 +1,35 @@
+// Body
+$body-bg: #fff;
+$body-max-width: 1900px;
+// Header
+$header-background: #fff;
+// Borders
+$laravel-border-color: darken($body-bg, 10%);
+$list-group-border: $laravel-border-color;
+$navbar-default-border: $laravel-border-color;
+$panel-default-border: $laravel-border-color;
+$panel-inner-border: $laravel-border-color;
+// Brands
+$brand-primary: #F57C00;
+$brand-info: #8eb4cb;
+$brand-success: #2ab27b;
+$brand-warning: #cbb956;
+$brand-danger: #bf5329;
+$brand-orange: #F57C00;
+// Typography
+$icon-font-path: '/analuciafestaseeventos/public/fonts/';
+$font-family-sans-serif: "Lato",
+sans-serif;
+$font-size-base: 14px;
+$line-height-base: 1.6;
+$text-color: #636363;
+// Navbar
+$navbar-default-bg: #fff;
+// Buttons
+$btn-default-color: $text-color;
+// Inputs
+$input-border: lighten($brand-primary, 40%);
+$input-border-focus: lighten($brand-primary, 25%);
+$input-color-placeholder: lighten($text-color, 30%);
+// Panels
+$panel-default-heading-bg: #fff;

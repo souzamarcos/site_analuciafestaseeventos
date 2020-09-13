@@ -1,0 +1,20 @@
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400);
+@import "node_modules/bourbon/app/assets/stylesheets/bourbon";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+// Utils
+@import "utils/variables";
+@import "utils/mixins";
+@import "utils/default";
+@import "utils/buttons";
+@import "utils/header";
+@import "utils/footer";
+@import "utils/section";
+@import "utils/banner-mini";
+//home
+@import "home/banner";
+@import "home/depoimentos";
+//fotos
+@import "fotos/fotos";
+//servicos
+@import "servicos/servicos";
