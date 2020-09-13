@@ -51,17 +51,20 @@ function photoSwipeCss() {
 
 function appScript() {
     return src([
+        //external
+        './src/assets/js/jquery-3.2.1.js',
+        './src/assets/js/bootstrap-3.3.7.js',
+
+        //app
         './src/assets/js/home/mapa.js',
         './src/assets/js/home/home.js',
         './src/assets/js/app.js'
     ])
-    .pipe(concat('app.js'))
-    .pipe(dest('./docs/assets/js/'))
+    .pipe(concat('app.min.js'))
     .pipe(babel({
         presets: ['@babel/env']
     }))
     .pipe(uglify({}))
-    .pipe(rename('app.min.js'))
     .pipe(dest('./docs/assets/js/'));
 }
 
@@ -85,16 +88,6 @@ function images() {
     .pipe(imagemin())
     .pipe(dest('./docs/assets/img'));
 }
-
-function galleryImages() {
-    return src([
-        './src/assets/img/*',
-        './src/assets/img/fotos/*'
-    ])
-    .pipe(imagemin())
-    .pipe(dest('./docs/assets/img'));
-}
-
 
 function galleryThumbnails() {
     return src([
