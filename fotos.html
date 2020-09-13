@@ -180,7 +180,9 @@
     <script src="assets/js/photoswipe.js"></script>
     <script>
         initPhotoSwipeFromDOM('.galeria');
-        buscarFotos()
+        $(document).ready(function() {
+            buscarFotos();
+        });
     </script>
 </body>
 </html>
