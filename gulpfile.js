@@ -80,7 +80,8 @@ function appScript() {
 function photoSwipeScript() {
     return src([
         './src/assets/js/photoswipe.js',
-        './src/assets/js/photoswipe-ui-default.js'
+        './src/assets/js/photoswipe-ui-default.js',
+        './src/assets/js/photoswipe-init.js'
     ])
     .pipe(concat('photoswipe.min.js'))
     .pipe(uglify({}))
