@@ -1,6 +1,6 @@
 'use strict';
 
-const { parallel, src, dest  } = require('gulp');
+const { series, parallel, src, dest  } = require('gulp');
 const concat = require('gulp-concat');
 const htmlmin = require('gulp-htmlmin');
 const sass = require('gulp-sass');
@@ -114,7 +114,7 @@ function images(done) {
             },
         },
         {
-            src: "./src/assets/img/fotos/thumbnail/*.{jpeg,jpg,png}",
+            src: "./src/assets/img/fotos/*.{jpeg,jpg,png}",
             dist: "./docs/assets/img/fotos/thumbnail",
             quality: 20,
             convertJpeg: true,
@@ -127,54 +127,73 @@ function images(done) {
 
     // loop through configuration array of objects
     transforms.forEach(function (transform) {
-      // if dist folder does not exist, create it with all parent folders
-      if (!fs.existsSync(transform.dist)) {
-        fs.mkdirSync(transform.dist, { recursive: true }, (err) => {
-          if (err) throw err;
-        });
-      }
+        // if dist folder does not exist, create it with all parent folders
+        if (!fs.existsSync(transform.dist)) {
+            fs.mkdirSync(transform.dist, { recursive: true }, (err) => {
+            if (err) throw err;
+            });
+        }
 
-      // glob all files
-      let files = glob.sync(transform.src);
+        // glob all files
+        let files = glob.sync(transform.src);
+        let fotos = {
+            data: []
+        };
   
-      // for each file, apply transforms and save to file
-      files.forEach(function (file) {
-        let fileExtension = path.extname(file)
-        let filename = path.basename(file, fileExtension);
-        let sharpTask = sharp(file)
+        // for each file, apply transforms and save to file
+        files.forEach(function (file) {
+            const fileExtension = path.extname(file)
+            const filename = path.basename(file, fileExtension);
+            let sharpTask = sharp(file)
 
-        if(transform.resize){
-            sharpTask = sharpTask.resize(transform.resize);
-        }
 
-        if(transform.convertJpeg){
-            sharpTask = sharpTask
-                .jpeg({ quality: transform.quality })
-                .toFile(`${transform.dist}/${filename}.jpeg`)
-        }else {
-            sharpTask = sharpTask
-                .toFile(`${transform.dist}/${filename}${fileExtension}`)
-        }
+            if(transform.resize){
+                sharpTask = sharpTask.resize(transform.resize);
+            }
 
-        sharpTask.catch((err) => {
-            console.log(err);
+            let distFileName = null;
+            if(transform.convertJpeg) {
+                distFileName = `${filename}.jpeg`
+                sharpTask
+                    .jpeg({ quality: transform.quality })
+                    .toFile(`${transform.dist}/${distFileName}`)
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }else {
+                distFileName = `${filename}${fileExtension}`;
+                sharpTask
+                    .toFile(`${transform.dist}/${distFileName}`)
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
+            
+            if (transform.updateFotosJson) {
+                sharpTask.metadata()
+                    .then(info => {
+                        fotos.data.push({
+                            "nome": distFileName,
+                            "width": info.width,
+                            "height": info.height
+                        })
+                    })
+                    .then(() => {
+                        fs.writeFileSync('./src/fotos.json', JSON.stringify(fotos));
+                    })
+            }
         });
-      });
-
-        if(transform.updateFotosJson){
-            console.log("Atualizar fotos.json")
-        }
     });
     done();
 }
 
 exports.build = parallel(copyIco, 
     copyGifs, 
-    pages, 
+    series(images,pages), 
     fotosJson, 
     appCss, 
     photoSwipeCss, 
     appScript, 
     photoSwipeScript, 
-    images
+    
 );

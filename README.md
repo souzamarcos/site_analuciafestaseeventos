@@ -6,6 +6,8 @@ Site está sendo hospedado pelo próprio Github.
 
 Os arquivos do site minificados vão ficar disponíveis na pasta "/docs"
 
+As imagens da página "/fotos" devem ser adicionadas no diretório "src/assets/img/fotos" e após deve rodar a task "build" do gulp para gerar as thumbnails e atualizar o arquivo [fotos.json](google.com)
+
 # Tecnologias
 * [gulp](https://gulpjs.com/)
 * [jQuery](https://jquery.com/)
