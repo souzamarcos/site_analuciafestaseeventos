@@ -105,11 +105,11 @@ function images(done) {
         {
             src: "./src/assets/img/fotos/*.{jpeg,jpg,png}",
             dist: "./docs/assets/img/fotos",
-            quality: 85,
+            quality: 70,
             convertJpeg: true,
             updateFotosJson: true,
             resize: {
-                width: 800
+                width: 1000
             },
         },
         {
