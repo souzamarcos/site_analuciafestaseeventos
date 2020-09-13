@@ -1,0 +1,29 @@
+.banner-mini {
+    margin-top: 65px;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    &::before {
+        z-index: 1;
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(#000, 0.35)
+    }
+}
+
+@include bp-menor-768 {
+    .banner-mini {
+        height: 200px;
+    }
+}

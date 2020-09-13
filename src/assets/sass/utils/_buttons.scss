@@ -1,0 +1,67 @@
+.btn-flat {
+    @include transition(background-color 0.6s);
+    background-color: transparent;
+    border: 1px solid;
+    padding: 10px 25px;
+    font-weight: 600;
+    font-size: 1.4rem;
+    background-color: transparent;
+    color: #333333;
+    &:hover {
+        background-color: rgba(#333333, 0.10)
+    }
+    &.orange {
+        color: $brand-orange;
+        &:hover {
+            background-color: rgba($brand-orange, 0.10)
+        }
+    }
+    &.white {
+        color: #fff;
+        &:hover {
+            background-color: rgba(#fff, 0.10)
+        }
+    }
+}
+
+.buttons-float {
+    padding: 10px 0;
+    position: fixed;
+    left: 50%;
+    bottom: 15px;
+    @include transform(translateX(-50%));
+    z-index: 25;
+}
+
+.button-float {
+    @include transition(transform 0.3s);
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    box-shadow: 0px 3px 3px rgba(#000, 0.3);
+    background-color: blue;
+    margin: 0 10px;
+    text-align: center;
+    display: inline-block;
+    color: white;
+    font-size: 1.8rem;
+    &:hover {
+        transform: scale(1.1);
+    }
+    i {
+        vertical-align: middle;
+    }
+    &.facebook {
+        background-color: #3b5998;
+    }
+    &.instagram {
+        background: radial-gradient(ellipse at 70% 70%, #ee583f 8%, #d92d77 42%, #bd3381 58%);
+    }
+}
+
+@include bp-menor-768 {
+    .buttons-float {
+        bottom: 40px;
+    }
+}

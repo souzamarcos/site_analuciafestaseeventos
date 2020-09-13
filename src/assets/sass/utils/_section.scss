@@ -1,0 +1,175 @@
+.section-line {
+    background-color: #eeeeee;
+    text-align: center;
+    position: relative;
+    &.contato{
+        border-top: 1px solid #ddd;
+    }
+    img{
+        max-width: 100%;
+    }
+    .image{
+        padding: 15px;
+    }
+    &.padding,
+    .padding {
+        padding: 30px;
+    }
+    &.no-padding{
+        padding: 0;
+        .description{
+            padding: 0;
+        }
+    }
+    &.orange {
+        background-color: $brand-orange;
+        color: #fff;
+    }
+    &.grey {
+        background-color: #adadad;
+    }
+    &.white {
+        background-color: #fff;
+    }
+    .btn-flat{
+        display: block;
+        max-width: 150px;
+        margin: 0 auto;
+    }
+    .description {
+        padding: 40px;
+        &.full{
+            .card-description{
+                max-width: none;
+            }
+        }
+    }
+    .section-title,
+    .text {
+        margin-bottom: 20px;
+    }
+    .images-group,
+    .card-description {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .image-small {
+        max-width: 100%;
+        padding: 0px !important;
+        img {
+            max-width: 100%;
+        }
+    }
+    .photos-background {
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+    }
+    .map {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        padding: 0;
+    }
+    .background-image {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        @include transition(transform 0.5s);
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+        height: 150px;
+        background-color: black;
+        &.move-top {
+            &:hover {
+                @include transform(translateY(-20px));
+            }
+        }
+        &.move-left-down {
+            &:hover {
+                @include transform(translate(-20px, 20px));
+            }
+        }
+        &.move-left-up {
+            &:hover {
+                @include transform(translate(-20px, -20px));
+            }
+        }
+        &.move-right-down {
+            &:hover {
+                @include transform(translate(20px, 20px));
+            }
+        }
+        &.move-right-up {
+            &:hover {
+                @include transform(translate(20px, -20px));
+            }
+        }
+    }
+}
+
+section{
+    &.fotos-galeria,&.espaco,&.servicos {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+}
+@include bp-menor-768 {
+    .section-line {
+        &.fotos {
+            background-color: transparent !important;
+            .photos-background {
+                &::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: rgba(#000, 0.5)
+                }
+            }
+        }
+        .map {
+            position: relative;
+            height: 250px;
+        }
+        &.padding,
+        .padding {
+            padding: 15px;
+        }
+        .image{
+            padding: 0px;
+        }
+        .description{
+            padding: 40px 0 40px 0;
+            &.padding-h-xs{
+                padding: 40px 15px 40px 15px;
+            }
+        }
+    }
+    section{
+        &.fotos-galeria,&.espaco,&.servicos {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+    }
+}
+@include bp-maior-1200{
+    .section-line {
+        &.fotos {
+            .photos-background {
+                background-position: center -80px;
+            }
+        }
+    }
+}

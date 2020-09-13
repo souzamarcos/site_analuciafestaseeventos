@@ -1,0 +1,90 @@
+//carrosel fade
+.carousel-fade {
+    .carousel-inner {
+        .item {
+            transition-property: opacity;
+        }
+        .item,
+        .active.left,
+        .active.right {
+            opacity: 0;
+        }
+        .active,
+        .next.left,
+        .prev.right {
+            opacity: 1;
+        }
+        .next,
+        .prev,
+        .active.left,
+        .active.right {
+            left: 0;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    .carousel-control {
+        z-index: 2;
+    }
+}
+
+//banner
+.banner {
+    width: 100%;
+    .carousel {
+        height: 100vh;
+    }
+    .carousel-inner {
+        height: 100%;
+    }
+    .item {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center center;
+        // &::after {
+        //     display: block;
+        //     content: "";
+        //     position: absolute;
+        //     top: 0;
+        //     left: 0;
+        //     right: 0;
+        //     bottom: 0;
+        //     background-color: rgba(0, 0, 0, 0.35);
+        //     z-index: 1;
+        // }
+    }
+    .carousel-caption {
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 30px 100px 30px 30px;
+        right: auto;
+    }
+}
+
+.carousel-indicators {
+    width: auto;
+    margin: 0;
+    transform: rotate(-90deg);
+    top: 50%;
+    right: 0;
+    left: auto;
+    height: 0;
+    padding-bottom: 15px;
+}
+
+//-----------medias queries----------//
+@include bp-menor-992 {
+    .banner {
+        .carousel-caption {
+            width: 100%;
+            right: 0;
+            padding: 30px 30px 110px 30px;
+            justify-content: flex-end;
+        }
+    }
+}
