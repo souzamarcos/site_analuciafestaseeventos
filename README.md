@@ -10,15 +10,27 @@ Os arquivos do site minificados vão ficar disponíveis na pasta "/docs"
 * [gulp](https://gulpjs.com/)
 * [jQuery](https://jquery.com/)
 * [PhotoSwipe](https://photoswipe.com/)
+* [ImageMagick](https://imagemagick.org/script/download.php)
 
 # Buildar site
-Primeiro é necessário instalar o gulp globalmente
+Instale o [photoSwipe](https://photoswipe.com/)
+
+* Ubuntu 
+```
+apt-get install imagemagick
+apt-get install graphicsmagick
+```
+
+* Windows: Instale o [ImageMagick](https://imagemagick.org/script/download.php) e o [GraphicsMagick](ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/windows/)
+
+
+Instale o gulp globalmente
 
 ```
 npm install --global gulp-cli
 ```
 
-Depois é necessário intalar as dependências
+Instale as dependências do npm
 ```
 npm install
 ```

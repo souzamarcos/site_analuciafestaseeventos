@@ -1,12 +1,7 @@
 'use strict';
 
-/*var autoprefixer = require('gulp-autoprefixer');
-var csso = require('gulp-csso');
-var del = require('del');*/
-const { parallel, src, dest, watch  } = require('gulp');
-const rename = require('gulp-rename');
+const { parallel, src, dest  } = require('gulp');
 const concat = require('gulp-concat');
-
 const htmlmin = require('gulp-htmlmin');
 const sass = require('gulp-sass');
 const cleanCSS = require('gulp-clean-css');
@@ -14,6 +9,16 @@ const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 const imagemin = require('gulp-imagemin');
 
+const fs = require("fs");
+const glob = require("glob");
+const path = require("path");
+const sharp = require('sharp')
+
+
+function copyIco() {
+    return src('./src/*.ico')
+    .pipe(dest('./docs/'));
+}
 
 function pages() {
     return src(['./src/*.html'])
@@ -81,30 +86,84 @@ function photoSwipeScript() {
     .pipe(dest('./docs/assets/js/'));
 }
 
-function images() {
-    return src([
-        './src/assets/img/*'
-    ])
-    .pipe(imagemin())
-    .pipe(dest('./docs/assets/img'));
+function images(done) {
+    //config
+    const transforms = [
+        {
+            src: "./src/assets/img/*.{jpeg,jpg}",
+            dist: "./docs/assets/img/",
+            quality: 50,
+            convertJpeg: true
+        },
+        {
+            src: "./src/assets/img/*.{png}",
+            dist: "./docs/assets/img/",
+            quality: 50,
+            convertJpeg: false
+        },
+        {
+            src: "./src/assets/img/fotos/*.{jpeg,jpg,png}",
+            dist: "./docs/assets/img/fotos",
+            quality: 85,
+            convertJpeg: true,
+            updateFotosJson: true,
+            resize: {
+                width: 800
+            },
+        },
+        {
+            src: "./src/assets/img/fotos/thumbnail/*.{jpeg,jpg,png}",
+            dist: "./docs/assets/img/fotos/thumbnail",
+            quality: 20,
+            convertJpeg: true,
+            resize: {
+                width: 200
+                //fit: "cover",
+            }
+        }
+    ];
+
+    // loop through configuration array of objects
+    transforms.forEach(function (transform) {
+      // if dist folder does not exist, create it with all parent folders
+      if (!fs.existsSync(transform.dist)) {
+        fs.mkdirSync(transform.dist, { recursive: true }, (err) => {
+          if (err) throw err;
+        });
+      }
+
+      // glob all files
+      let files = glob.sync(transform.src);
+  
+      // for each file, apply transforms and save to file
+      files.forEach(function (file) {
+        let fileExtension = path.extname(file)
+        let filename = path.basename(file, fileExtension);
+        let sharpTask = sharp(file)
+
+        if(transform.resize){
+            sharpTask = sharpTask.resize(transform.resize);
+        }
+
+        if(transform.convertJpeg){
+            sharpTask = sharpTask
+                .jpeg({ quality: transform.quality })
+                .toFile(`${transform.dist}/${filename}.jpeg`)
+        }else {
+            sharpTask = sharpTask
+                .toFile(`${transform.dist}/${filename}${fileExtension}`)
+        }
+
+        sharpTask.catch((err) => {
+            console.log(err);
+        });
+      });
+
+        if(transform.updateFotosJson){
+            console.log("Atualizar fotos.json")
+        }
+    });
+    done();
 }
 
-function galleryThumbnails() {
-    return src([
-        './src/assets/img/fotos/thumbnail/*'
-    ])
-    .pipe(imagemin([
-        imagemin.gifsicle({interlaced: true}),
-        imagemin.mozjpeg({quality: 35, progressive: true}),
-        imagemin.optipng({optimizationLevel: 5}),
-        imagemin.svgo({
-            plugins: [
-                {removeViewBox: true},
-                {cleanupIDs: false}
-            ]
-        })
-    ]))
-    .pipe(dest('./docs/assets/img/fotos/thumbnail/'));
-}
-
-exports.build = parallel(pages, fotosJson, appCss, photoSwipeCss, appScript, photoSwipeScript, images, galleryThumbnails);
+exports.build = parallel(copyIco, pages, fotosJson, appCss, photoSwipeCss, appScript, photoSwipeScript, images);
