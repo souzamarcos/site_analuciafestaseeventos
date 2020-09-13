@@ -80,12 +80,9 @@ function appScript() {
 
 function photoSwipeScript() {
     return src([
-        './src/assets/js/photoswipe-ui-default.js',
-        './src/assets/js/photoswipe.js'
+        './src/assets/js/photoswipe.js',
+        './src/assets/js/photoswipe-ui-default.js'
     ])
-    .pipe(babel({
-        presets: ['@babel/env']
-    }))
     .pipe(concat('photoswipe.min.js'))
     .pipe(uglify({}))
     .pipe(dest('./docs/assets/js/'));
