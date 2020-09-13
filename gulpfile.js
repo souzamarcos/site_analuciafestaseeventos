@@ -144,9 +144,10 @@ function images(done) {
             const filename = path.basename(file, fileExtension);
             let sharpTask = sharp(file)
 
-
-            if(transform.resize){
-                sharpTask = sharpTask.resize(transform.resize);
+            if (transform.resize) {
+                sharpTask = sharpTask.resize(transform.resize.width, transform.resize.height, {
+                    withoutEnlargement: true
+                });
             }
 
             let distFileName = null;
@@ -187,7 +188,6 @@ function updateFotosJson(fotos, distFileName, info) {
         "width": info.width,
         "height": info.height
     })
-    console.info(info)
     fs.writeFileSync('./src/fotos.json', JSON.stringify(fotos));
 }
 
