@@ -58,6 +58,9 @@
     &.instagram {
         background: radial-gradient(ellipse at 70% 70%, #ee583f 8%, #d92d77 42%, #bd3381 58%);
     }
+    &.whatsapp {
+        background-color: #00e676;
+    }
 }
 
 @include bp-menor-768 {
