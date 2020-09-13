@@ -1,2 +1,22 @@
-# analucia
-Site para Ana Lúcia Festas e Eventos
+# Site de Ana Lúcia Festas e Eventos
+Páginas estáticas necessárias para o funcionamento do site. [Ver aqui](https://analuciafestaseeventos.com.br/)
+
+
+Site está sendo hospedado pelo próprio Github.
+
+# Tecnologias
+* [gulp](https://gulpjs.com/)
+* [jQuery](https://jquery.com/)
+* [PhotoSwipe](https://photoswipe.com/)
+
+# Buildar site
+Primeiro é necessário instalar o gulp globalmente
+
+```
+npm install --global gulp-cli
+```
+
+Depois é necessário intalar as outras dependências
+```
+npm install
+```

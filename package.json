@@ -1,0 +1,22 @@
+{
+  "name": "site_analuciafestaseeventos",
+  "version": "1.0.0",
+  "description": "Site para Ana Lúcia Festas e Eventos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/souzamarcos/site_analuciafestaseeventos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/souzamarcos/site_analuciafestaseeventos/issues"
+  },
+  "homepage": "https://github.com/souzamarcos/site_analuciafestaseeventos#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
