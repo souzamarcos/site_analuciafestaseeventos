@@ -25,7 +25,7 @@ function copyGifs() {
 }
 
 function pages() {
-    return src(['./src/*.html'])
+    return src(['./src/*.{html,xml}'])
     .pipe(htmlmin({
         collapseWhitespace: true,
         removeComments: true
